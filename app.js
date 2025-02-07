@@ -4,24 +4,19 @@ const cors = require('cors');
 const UsuariosController = require('./controllers/UsuariosController');
 const app = express();
 
-// Configuración de CORS
+// Configuración de CORS para permitir todas las solicitudes
 app.use(cors({
-    origin: 'http://localhost:9000', // Permite solicitudes desde este origen
-    methods: ['GET', 'POST'], // Métodos permitidos
-    allowedHeaders: ['Content-Type'], // Encabezados permitidos
-  }));
+    origin: '*', // Permitir cualquier origen
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'] // Encabezados permitidos
+}));
 
 app.use(express.json());
 app.use(UsuariosController);
 
 app.listen(3001, () => {
-    console.log("el servidor esta en el puerto 3001");
-})
+    console.log("El servidor está en el puerto 3001");
+});
 
-app.use(cors()); // Permite todas las solicitudes CORS
-
-
-
-
-
-dbconnect(); // Con esto se conecta a la base de datos
+// Conectar a la base de datos
+dbconnect();
